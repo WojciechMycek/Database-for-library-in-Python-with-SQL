@@ -54,7 +54,7 @@ def add():
     date.delete(0,END)
 
 def show():
-    conn = sqlite3.connect('Library_users.db')
+    conn = sqlite3.connect('Library_app.db')
     #create cursor
     c = conn.cursor()
 
