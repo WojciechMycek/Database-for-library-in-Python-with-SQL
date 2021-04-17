@@ -15,16 +15,66 @@ conn = sqlite3.connect('Library_app.db')
 #create cursor
 c = conn.cursor()
 
-c.execute('''CREATE TABLE books(
-   tittle text,
-   author text,
-   who_get_it text,
-   publishing_house text,
-   date integer
-)''')
+#c.execute('''CREATE TABLE books(
+#   tittle text,
+#   author text,
+#   who_get_it text,
+#   publishing_house text,
+#   date integer
+#)''')
 
 def add():
-    return 0
+    conn = sqlite3.connect('Library_app.db')
+    #create cursor
+    c = conn.cursor()
+
+    #Insert into Table
+    c.execute("INSERT INTO books VALUES (:tittle, :author,:who_get_it,:publishing_house,:date)",
+        {
+            'tittle':tittle.get(),
+            'author':author.get(),
+            'who_get_it':who_get_it.get(),
+            'publishing_house':publishing_house.get(),
+            'date':date.get()
+        }
+    )
+
+    
+
+    #commit Changes
+    conn.commit()   
+
+    #Close Connection
+    conn.close()
+
+    tittle.delete(0,END)
+    author.delete(0,END)
+    who_get_it.delete(0,END)
+    publishing_house.delete(0,END)
+    date.delete(0,END)
+
+def show():
+    conn = sqlite3.connect('Library_users.db')
+    #create cursor
+    c = conn.cursor()
+
+    c.execute("SELECT *, oid FROM books")
+    records=c.fetchall()#fetch all records
+    print(records)
+
+    #Loop thru Results
+    print_records=""
+    for record in records:
+        print_records += str(record) + "\n"
+    
+    query_label = Label(root,text=print_records)
+    query_label.grid(row=7,column=0,columnspan=2)
+
+    #commit Changes
+    conn.commit()   
+
+    #Close Connection
+    conn.close()
 
 #date of books
 tittle = Entry(root, width=35)
@@ -63,5 +113,14 @@ date_label.grid(row=4,column=0)
 submit_btn = Button(root, text="Add record to Database", command=add)
 submit_btn.grid(row=5,column=0,columnspan=2,pady=10,padx=10,ipadx=100)
 
+#Create a Query Button
+query_btn = Button(root,text="Show records",command=show)
+query_btn.grid(row=6, column=0,columnspan=2,pady=10,padx=10,ipadx=125)
+
+#commit Changes
+conn.commit()   
+
+#Close Connection
+conn.close()
 
 root.mainloop()
