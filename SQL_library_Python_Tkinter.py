@@ -60,6 +60,36 @@ def add():
     publishing_house.delete(0,END)
     date.delete(0,END)
 
+def add_users():
+    conn = sqlite3.connect('Library_app.db')
+    #create cursor
+    c = conn.cursor()
+
+    #Insert into Table
+    c.execute("INSERT INTO users VALUES (:vorname, :name,:address,:user_id)",
+        {
+            'vorname':vorname.get(),
+            'name':name.get(),
+            'address':adress.get(),
+            'user_id':user_id.get(),
+            
+        }
+    )
+
+    
+
+    #commit Changes
+    conn.commit()   
+
+    #Close Connection
+    conn.close()
+
+    tittle.delete(0,END)
+    author.delete(0,END)
+    who_get_it.delete(0,END)
+    publishing_house.delete(0,END)
+    date.delete(0,END)
+
 def show():
     conn = sqlite3.connect('Library_app.db')
     #create cursor
@@ -76,6 +106,29 @@ def show():
     
     query_label = Label(root,text=print_records)
     query_label.grid(row=7,column=0,columnspan=2)
+
+    #commit Changes
+    conn.commit()   
+
+    #Close Connection
+    conn.close()
+
+def show_users():
+    conn = sqlite3.connect('Library_app.db')
+    #create cursor
+    c = conn.cursor()
+
+    c.execute("SELECT *, oid FROM users")
+    records=c.fetchall()#fetch all records
+    print(records)
+
+    #Loop thru Results
+    print_records=""
+    for record in records:
+        print_records += str(record) + "\n"
+    
+    query_label = Label(root,text=print_records)
+    query_label.grid(row=7,column=2,columnspan=2)
 
     #commit Changes
     conn.commit()   
@@ -153,6 +206,13 @@ address_label.grid(row=2,column=2)
 user_id_label = Label(root,text="User id: ")
 user_id_label.grid(row=3,column=2)
 
+# Create Add User Button
+submit_btn = Button(root, text="Add user", command=add_users)
+submit_btn.grid(row=5,column=2,columnspan=2,pady=10,padx=10,ipadx=134)
+
+#Create a show users Button
+query_btn = Button(root,text="Show users",command=show_users)
+query_btn.grid(row=6, column=2,columnspan=2,pady=10,padx=10,ipadx=125)
 
 #commit Changes
 conn.commit()   
