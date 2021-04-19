@@ -23,12 +23,12 @@ c = conn.cursor()
 #   date integer
 #)''')
 
-c.execute('''CREATE TABLE users(
-    vorname text,
-    name text,
-    user_id integer,
-    adress text
-)''')
+#c.execute('''CREATE TABLE users(
+#    vorname text,
+#    name text,
+#    user_id integer,
+#    adress text
+#)''')
 
 def add():
     conn = sqlite3.connect('Library_app.db')
@@ -123,6 +123,36 @@ submit_btn.grid(row=5,column=0,columnspan=2,pady=10,padx=10,ipadx=134)
 #Create a Query Button
 query_btn = Button(root,text="Show records",command=show)
 query_btn.grid(row=6, column=0,columnspan=2,pady=10,padx=10,ipadx=125)
+
+#-----------------------------------------------------------------------
+
+#date of users
+vorname = Entry(root, width=35)
+vorname.grid(row=0,column=3, padx=30,pady=(10,0))
+
+name = Entry(root, width=35)
+name.grid(row=1,column=3, padx=20)
+
+adress = Entry(root, width=35)
+adress.grid(row=2,column=3, padx=20)
+
+user_id = Entry(root, width=35)
+user_id.grid(row=3,column=3, padx=20)
+
+#print names of priting data
+vorname_label= Label(root,text="Vorname")
+vorname_label.grid(row=0,column=2,pady=(10,0))
+
+name_label = Label(root,text="Name")
+name_label.grid(row=1,column=2)
+
+address_label = Label(root,text="Address")
+address_label.grid(row=2,column=2)
+
+
+user_id_label = Label(root,text="User id: ")
+user_id_label.grid(row=3,column=2)
+
 
 #commit Changes
 conn.commit()   
