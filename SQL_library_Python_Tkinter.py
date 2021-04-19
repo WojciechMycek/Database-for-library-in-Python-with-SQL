@@ -23,6 +23,13 @@ c = conn.cursor()
 #   date integer
 #)''')
 
+c.execute('''CREATE TABLE users(
+    vorname text,
+    name text,
+    user_id integer,
+    adress text
+)''')
+
 def add():
     conn = sqlite3.connect('Library_app.db')
     #create cursor
@@ -110,8 +117,8 @@ date_label = Label(root,text="Date")
 date_label.grid(row=4,column=0)
 
 # Create Add Button
-submit_btn = Button(root, text="Add record to Database", command=add)
-submit_btn.grid(row=5,column=0,columnspan=2,pady=10,padx=10,ipadx=100)
+submit_btn = Button(root, text="Add book", command=add)
+submit_btn.grid(row=5,column=0,columnspan=2,pady=10,padx=10,ipadx=134)
 
 #Create a Query Button
 query_btn = Button(root,text="Show records",command=show)
