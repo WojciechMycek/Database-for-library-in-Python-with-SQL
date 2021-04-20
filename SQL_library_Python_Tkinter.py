@@ -4,7 +4,7 @@ import sqlite3
 
 root = Tk()
 root.title("SQL Library Python")
-root.geometry("1100x400")
+root.geometry("1200x400")
 
 
 #create a database
@@ -213,6 +213,29 @@ submit_btn.grid(row=5,column=2,columnspan=2,pady=10,padx=10,ipadx=134)
 #Create a show users Button
 query_btn = Button(root,text="Show users",command=show_users)
 query_btn.grid(row=6, column=2,columnspan=2,pady=10,padx=10,ipadx=125)
+
+#---------------------------------------------------------------------
+#looking for users or books
+user_id_look_for = Entry(root, width=35)
+user_id_look_for.grid(row=0,column=5, padx=20)
+
+user_id_look_for = Label(root,text="Lk for user id")
+user_id_look_for.grid(row=0,column=4,pady=(10,0))
+
+look_for_book = Entry(root, width=35)
+look_for_book.grid(row=1,column=5, padx=20)
+
+look_for_book = Label(root,text="Lk for book")
+look_for_book.grid(row=1,column=4,pady=(10,0))
+
+# Create Add User Button
+submit_btn = Button(root, text="Show uses")
+submit_btn.grid(row=2,column=4,columnspan=2,pady=10,padx=10,ipadx=129)
+
+#Create a show users Button
+query_btn = Button(root,text="Show books")
+query_btn.grid(row=3, column=4,columnspan=2,pady=10,padx=10,ipadx=125)
+
 
 #commit Changes
 conn.commit()   
