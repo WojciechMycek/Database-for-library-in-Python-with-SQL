@@ -41,13 +41,14 @@ def add():
     c = conn.cursor()
 
     #Insert into Table
-    c.execute("INSERT INTO books VALUES (:tittle, :author,:who_get_it,:publishing_house,:date)",
+    c.execute("INSERT INTO books VALUES (:tittle, :author,:who_get_it,:publishing_house,:date,:books_id)",
         {
             'tittle':tittle.get(),
             'author':author.get(),
             'who_get_it':who_get_it.get(),
             'publishing_house':publishing_house.get(),
-            'date':date.get()
+            'date':date.get(),
+            'books_id':book_id.get()
         }
     )
 
@@ -110,7 +111,7 @@ def show():
         print_records += str(record) + "\n"
     
     query_label = Label(root,text=print_records)
-    query_label.grid(row=7,column=0,columnspan=2)
+    query_label.grid(row=9,column=0,columnspan=2)
 
     #commit Changes
     conn.commit()   
@@ -154,9 +155,13 @@ who_get_it.grid(row=2,column=1, padx=20)
 publishing_house = Entry(root, width=35)
 publishing_house.grid(row=3,column=1, padx=20)
 
-#print names of priting data
 date = Entry(root, width=35)
 date.grid(row=4,column=1, padx=20)
+
+book_id = Entry(root,width=35)
+book_id.grid(row=5,column=1,padx=20)
+
+#print names of priting data
 
 tittle_label = Label(root,text="Tittle'Books")
 tittle_label.grid(row=0,column=0,pady=(10,0))
@@ -174,13 +179,16 @@ publishing_label.grid(row=3,column=0)
 date_label = Label(root,text="Date")
 date_label.grid(row=4,column=0)
 
+book_id_label = Label(root,text="Book_id")
+book_id_label.grid(row=5,column=0)
+
 # Create Add Button
 submit_btn = Button(root, text="Add book", command=add)
-submit_btn.grid(row=5,column=0,columnspan=2,pady=10,padx=10,ipadx=134)
+submit_btn.grid(row=6,column=0,columnspan=2,pady=10,padx=10,ipadx=134)
 
 #Create a Query Button
 query_btn = Button(root,text="Show records",command=show)
-query_btn.grid(row=6, column=0,columnspan=2,pady=10,padx=10,ipadx=125)
+query_btn.grid(row=7, column=0,columnspan=2,pady=10,padx=10,ipadx=125)
 
 #-----------------------------------------------------------------------
 
