@@ -16,6 +16,7 @@ conn = sqlite3.connect('Library_app.db')
 c = conn.cursor()
 
 #c.execute('''CREATE TABLE books(
+#   books_id INT PRIMARY KEY,
 #   tittle text,
 #   author text,
 #   who_get_it text,
@@ -23,12 +24,16 @@ c = conn.cursor()
 #   date integer
 #)''')
 
+
 #c.execute('''CREATE TABLE users(
+#    borrowed_book INT PRIMARY KEY,
 #    vorname text,
 #    name text,
 #    user_id integer,
-#    adress text
+#    adress text,
+#    FOREIGN KEY(borrowed_book) REFERENCES books(books_id) ON DELETE SET NULL
 #)''')
+
 
 def add():
     conn = sqlite3.connect('Library_app.db')
@@ -229,12 +234,12 @@ look_for_book = Label(root,text="Lk for book")
 look_for_book.grid(row=1,column=4,pady=(10,0))
 
 # Create Add User Button
-submit_btn = Button(root, text="Show uses")
-submit_btn.grid(row=2,column=4,columnspan=2,pady=10,padx=10,ipadx=129)
+show_users_by_id = Button(root, text="Show users")
+show_users_by_id.grid(row=2,column=4,columnspan=2,pady=10,padx=10,ipadx=129)
 
 #Create a show users Button
-query_btn = Button(root,text="Show books")
-query_btn.grid(row=3, column=4,columnspan=2,pady=10,padx=10,ipadx=125)
+show_books_by_id = Button(root,text="Show books")
+show_books_by_id.grid(row=3, column=4,columnspan=2,pady=10,padx=10,ipadx=125)
 
 #try
 
